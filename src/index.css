@@ -1,0 +1,71 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT';
+}
+
+.App {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-list{
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todo-list-title {
+    color: rgb(129, 118, 118);
+    margin-bottom: 50px;
+    font-weight: normal;
+}
+
+.btn {
+    background-color: #0f0;
+    border: 0;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 80px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.btn:hover{
+    cursor: pointer;
+}
+
+.cards-container{
+    margin-top: 10px;
+}
+
+.card{
+    height: 70px;
+    width: 300px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: -1px 2px 14px rgba(0, 0, 0, 0.301);
+    align-items: flex-start;
+    position: relative;
+}
+
+.card:hover{
+    box-shadow: -1px 2px 14px rgba(0, 0, 0, 0.401);
+    cursor: default;
+}
+
+.card-buttons{
+    width: 40px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    right: 10px;
+}
