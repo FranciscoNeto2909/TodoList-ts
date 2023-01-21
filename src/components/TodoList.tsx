@@ -6,9 +6,11 @@ import Card from "./Card";
 import { TaskTypes } from "./Card";
 
 
-interface RootState {
+export interface IApp {
     App: {
-        formVisibility: boolean;
+        formVisibility: boolean,
+        msgVisibility:boolean,
+        msg:string;
         tasks: Array<TaskTypes>
     };
 }
@@ -16,7 +18,7 @@ interface RootState {
 
 export default function TodoList() {
     const dispatch = useDispatch();
-    const app = useSelector<RootState, RootState["App"]>(data => data.App)
+    const app = useSelector<IApp, IApp["App"]>(data => data.App)
     function handleOpenAddTaskForm() {
         if (!app.formVisibility) {
             dispatch(showForm())
@@ -27,7 +29,7 @@ export default function TodoList() {
     return (
         <div className="todo-list">
             <h1 className="todo-list-title">Lists</h1>
-            <button className="btn" onClick={handleOpenAddTaskForm}>Adicionar Task</button>
+            <button className={!app.formVisibility ? "btn btn--addTask" : "btn btn--addTask btn--cancel" } onClick={handleOpenAddTaskForm}>{app.formVisibility ? "Cancel Task" : "Add Task"}</button>
             <div className="addtask-container">
                 {app.formVisibility &&
                     <AddTaskForm />

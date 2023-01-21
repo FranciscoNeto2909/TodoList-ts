@@ -8,13 +8,27 @@
 }
 
 .App {
+    height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
-.todo-list{
+.message{
+    position: absolute;
+    padding: 5px;
+    top: 10px;border-radius: 5px;
+    right: 10px;
+    box-shadow: -1px 2px 14px rgba(0, 0, 0, 0.301);
+}
+
+.message-progress{
+    color: #0f0;
+    background-color:  transparent;
+    padding: 2px;
+}
+
+.todo-list {
     margin-top: 90px;
     display: flex;
     flex-direction: column;
@@ -32,22 +46,30 @@
     border: 0;
     color: #fff;
     border-radius: 5px;
-    padding: 10px 80px;
     font-weight: bold;
     font-size: 20px;
 }
-.btn:hover{
+
+.btn--cancel{
+    background-color: #f00;
+}
+
+.btn--addTask,
+.card {
+    padding: 10px;
+    width: 80vw;
+}
+
+.btn:hover {
     cursor: pointer;
 }
 
-.cards-container{
+.cards-container {
     margin-top: 10px;
 }
 
-.card{
+.card {
     height: 70px;
-    width: 300px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,15 +79,67 @@
     position: relative;
 }
 
-.card:hover{
+.task--done{
+    border-left: 10px solid #0f0;
+}
+
+.card-decription{
+    color: rgb(61, 61, 61);
+}
+
+.card:hover {
     box-shadow: -1px 2px 14px rgba(0, 0, 0, 0.401);
     cursor: default;
 }
 
-.card-buttons{
-    width: 40px;
+.card-buttons {
+    width: 50px;
     position: absolute;
     display: flex;
     justify-content: space-between;
-    right: 10px;
+    right: 5px;
+}
+
+.card-button {
+    color: #fff;
+    border-radius: 3px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.card-button--done {
+    background-color: #0f0;
+}
+
+.card-button--delete {
+    background-color: #f00;
+}
+
+.form{
+    height: 200px;
+    width: 80vw;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: -1px 2px 14px rgba(0, 0, 0, 0.401);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.form-title-container, .form-desc-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-title-input,.form-desc-input{
+    padding: 5px 5px 0 5px;
+    border:0;
+    font-size: 18px;
+    border-bottom: 1px solid #0f0;
+    outline: none;
+}
+
+.btn--form{
+    padding: 5px 0;
 }
