@@ -7,25 +7,40 @@
     font-family: 'Gill Sans', 'Gill Sans MT';
 }
 
+.bg--dark {
+    background-color: #12121a;
+    color: #fff;
+}
+
+.bg--light {
+    background-color: #fff;
+}
+
 .App {
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
+    transition: all .5s ease-in-out;
 }
 
-.message{
+.message {
     position: absolute;
     padding: 5px;
-    top: 10px;border-radius: 5px;
-    right: 10px;
+    top: 10px;
+    align-self: center;
+    border-radius: 5px;
     box-shadow: -1px 2px 14px rgba(0, 0, 0, 0.301);
 }
 
-.message-progress{
+.message-progress {
     color: #0f0;
-    background-color:  transparent;
+    background-color: transparent;
     padding: 2px;
+}
+
+.message-progress--dark {
+    color: #00f;
 }
 
 .todo-list {
@@ -42,22 +57,31 @@
 }
 
 .btn {
-    background-color: #0f0;
     border: 0;
     color: #fff;
     border-radius: 5px;
     font-weight: bold;
     font-size: 20px;
+    transition: all .5s ease-in-out;
 }
 
-.btn--cancel{
+.btn--light {
+    background-color: #0f0;
+}
+
+.btn--dark {
+    background-color: #00f;
+}
+
+.btn--cancel {
     background-color: #f00;
 }
 
 .btn--addTask,
-.card {
+.card,
+.form {
     padding: 10px;
-    width: 80vw;
+    width: 40vw;
 }
 
 .btn:hover {
@@ -79,11 +103,15 @@
     position: relative;
 }
 
-.task--done{
+.task--done {
     border-left: 10px solid #0f0;
 }
 
-.card-decription{
+.task-dark--done {
+    border-left: 10px solid #00f;
+}
+
+.card-description {
     color: rgb(61, 61, 61);
 }
 
@@ -111,13 +139,16 @@
     background-color: #0f0;
 }
 
+.card-button-dark--done {
+    background-color: #00f;
+}
+
 .card-button--delete {
     background-color: #f00;
 }
 
-.form{
+.form {
     height: 200px;
-    width: 80vw;
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
@@ -127,19 +158,82 @@
     justify-content: space-evenly;
 }
 
-.form-title-container, .form-desc-container{
+.form-title-container,
+.form-desc-container {
     display: flex;
     flex-direction: column;
 }
 
-.form-title-input,.form-desc-input{
+.form-input {
     padding: 5px 5px 0 5px;
-    border:0;
+    border: 0;
+    background-color: transparent;
     font-size: 18px;
-    border-bottom: 1px solid #0f0;
     outline: none;
 }
 
-.btn--form{
+.form-input--light {
+    color: #000;
+    border-bottom: 1px solid #0f0;
+}
+
+.form-input--dark {
+    color: #fff;
+    border-bottom: 1px solid #00f;
+}
+
+.btn--form {
     padding: 5px 0;
+}
+
+.theme-container {
+    margin-top: 25px;
+    right: 20px;
+    position: absolute;
+}
+
+.theme-input {
+    display: none;
+}
+
+.theme-label {
+    position: relative;
+    background-color: #fff;
+    width: 50px;
+    height: 25px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+    box-shadow: -1px 2px 14px rgba(0, 0, 0, 0.401);
+}
+
+.theme-slider {
+    position: absolute;
+    background-color: #0f0;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    transition: all .5s ease-in-out;
+}
+
+.theme-input:checked~.theme-label {
+    background-color: #000;
+    box-shadow: -1px 2px 14px rgba(255, 255, 255, 0.300);
+}
+
+.theme-input:checked~.theme-label .theme-slider {
+    transform: translateX(25px);
+    background-color: #00f;
+}
+
+@media(max-width: 500px) {
+    .btn--addTask,
+    .card,
+    .form {
+        padding: 10px;
+        width: 80vw;
+    }
 }

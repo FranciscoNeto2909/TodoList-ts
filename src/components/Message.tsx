@@ -15,7 +15,7 @@ export function Message() {
     return (
         <div className="message">
             <p>{app.msg}</p>
-            <progress className="message-progress" value={progress} max={10} style={{ width: "100%", height: "6px" }}></progress>
+            <progress className={app.theme == "light" ? "message-progress" : "message-progress--dark"} value={progress} max={10} style={{ width: "100%", height: "6px" }}></progress>
         </div>
     )
 }

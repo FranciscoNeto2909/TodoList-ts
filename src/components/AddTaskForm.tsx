@@ -12,40 +12,46 @@ type TodoTypes = {
 export default function AddTaskForm() {
     const dispatch = useDispatch()
     const app = useSelector<IApp, IApp["App"]>(data => data.App)
-    const todoid = app.tasks.length + 1
-    const [task, setTask] = useState({ id: todoid, title: "", description: "", status: "toDo" } as TodoTypes)
+    const todoId = app.tasks.length + 1
+    const [task, setTask] = useState({ id: todoId, title: "", description: "", status: "toDo" } as TodoTypes)
 
     function handleChangeTitle(e: string) {
-        setTask({ ...task, title: e })
+        const firstLetter = e.charAt(0).toUpperCase();
+        const restOfString = e.slice(1);
+        const capitalized = firstLetter + restOfString;
+        setTask({ ...task, title: capitalized })
     }
     function handleChangeDescription(e: string) {
-        setTask({ ...task, description: e })
+        const firstLetter = e.charAt(0).toUpperCase();
+        const restOfString = e.slice(1);
+        const capitalized = firstLetter + restOfString;
+        setTask({ ...task, description: capitalized })
     }
+
     function handleCreateTask(e: any): void {
-        e.preventDefault()
         if (task.title == "" || task.description == "") {
-            dispatch(setMsg("Preencha os campos!"))
+            dispatch(setMsg("Fill in the fields!"))
             return;
-        } else if (app.tasks.filter(filteredTask => filteredTask.title == task.title)) {
-            dispatch(setMsg("Titulos iguais!"))
+        } else if (app.tasks.some(filteredTask => task.title == filteredTask.title)) {
+            dispatch(setMsg("The titles are equals!"))
         } else {
             dispatch(createTask(task))
             dispatch(hideForm())
-            dispatch(setMsg("Tarefa criada!"))
+            dispatch(setMsg("Task created!"))
         }
     }
 
     return (
         <form className="form">
             <div className="form-title-container">
-                <label htmlFor="title">Titulo</label>
-                <input type="text" id="title" value={task.title} onChange={e => handleChangeTitle(e.target.value)} className="form-title-input" />
+                <label htmlFor="title">Title</label>
+                <input type="text" id="title" autoCapitalize="on" value={task.title} onChange={e => handleChangeTitle(e.target.value)} className={`form-input ${app.theme == "light" ? "form-input--light" : "form-input--dark"}`} />
             </div>
             <div className="form-desc-container">
-                <label htmlFor="desc">Descrição</label>
-                <input type="text" id="desc" value={task.description} onChange={e => handleChangeDescription(e.target.value)} className="form-desc-input" />
+                <label htmlFor="desc">Description</label>
+                <input type="text" autoCapitalize="on" id="desc" value={task.description} onChange={e => handleChangeDescription(e.target.value)} className={`form-input ${app.theme == "light" ? "form-input--light" : "form-input--dark"}`} />
             </div>
-            <button className="btn btn--form" onClick={handleCreateTask}>Criar Task</button>
+            <button type="button" className={`btn btn--form ${app.theme == "light" ? "btn--light" : "btn--dark"}`} onClick={handleCreateTask}>Create Task</button>
         </form>
     )
 }

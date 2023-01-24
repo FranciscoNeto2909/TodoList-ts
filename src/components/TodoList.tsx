@@ -11,6 +11,7 @@ export interface IApp {
         formVisibility: boolean,
         msgVisibility:boolean,
         msg:string;
+        theme:string,
         tasks: Array<TaskTypes>
     };
 }
@@ -19,6 +20,7 @@ export interface IApp {
 export default function TodoList() {
     const dispatch = useDispatch();
     const app = useSelector<IApp, IApp["App"]>(data => data.App)
+    
     function handleOpenAddTaskForm() {
         if (!app.formVisibility) {
             dispatch(showForm())
@@ -26,10 +28,11 @@ export default function TodoList() {
             dispatch(hideForm())
         }
     }
+
     return (
         <div className="todo-list">
             <h1 className="todo-list-title">Lists</h1>
-            <button className={!app.formVisibility ? "btn btn--addTask" : "btn btn--addTask btn--cancel" } onClick={handleOpenAddTaskForm}>{app.formVisibility ? "Cancel Task" : "Add Task"}</button>
+            <button className={`btn btn--addTask ${!app.formVisibility ? app.theme == "light" ? "btn--light" : "btn--dark" : "btn--cancel"}`} onClick={handleOpenAddTaskForm}>{app.formVisibility ? "Cancel Task" : "Add Task"}</button>
             <div className="addtask-container">
                 {app.formVisibility &&
                     <AddTaskForm />

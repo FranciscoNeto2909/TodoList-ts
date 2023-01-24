@@ -10,6 +10,7 @@ export interface Task {
 interface State {
     formVisibility: boolean;
     msgVisibility: boolean;
+    theme:string,
     msg: string;
     tasks: Task[];
 }
@@ -19,11 +20,12 @@ const AppSlice = createSlice({
     initialState: {
         formVisibility: false,
         msgVisibility: false,
+        theme:"light",
         msg: "",
         tasks: [{
             id: 1,
-            title: "Exemple",
-            description: "This is one exemple of task",
+            title: "Exemplo",
+            description: "Este é m exemplo de tarefa",
             status: "toDo"
         }]
     },
@@ -42,6 +44,9 @@ const AppSlice = createSlice({
         },
         clearMsg: (state) => {
             return { ...state, msg: "" }
+        },
+        setTheme:(state, {payload}:{payload:string}) => {
+            return {...state, theme:payload}
         },
         createTask: (state, { payload }: { payload: Task }) => {
             return { ...state, tasks: [...state.tasks, payload] }
@@ -63,5 +68,5 @@ const AppSlice = createSlice({
     },
 })
 
-export const { showForm, hideForm, hideMsg, setMsg, clearMsg, createTask, deleteTask, changeTaskStatus } = AppSlice.actions
+export const { showForm, hideForm, hideMsg, setMsg, clearMsg,setTheme, createTask, deleteTask, changeTaskStatus } = AppSlice.actions
 export default AppSlice.reducer
