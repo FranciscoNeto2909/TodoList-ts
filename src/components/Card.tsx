@@ -43,10 +43,8 @@ export default function Card(data: CardTypes) {
         dispatch(setMsg("Task deleted!"))
     }
 
-    const sla = `card-button ${app.theme == "light" ? "card-button--done" : "card-button-dark--done"}`
-
     return (
-        <div className={data.task.status == "done" ? app.theme == "light" ? "card task--done" : "card task-dark--done" : "card"} id={data.task.id}>
+        <div className={`card ${app.theme == "light" ? "card-light--shadows" : "card-dark--shadows"} ${data.task.status == "done" ? "task--done":""} ${data.task.status == "done" && app.theme == "dark" ? "task-dark--done":""}`} id={data.task.id}>
             <h4 className="card-title">{data.task.title}</h4>
             <p className="card-description">{data.task.description}</p>
             <div className="card-buttons">

@@ -98,11 +98,16 @@
     flex-direction: column;
     justify-content: center;
     border-radius: 10px;
-    box-shadow: -1px 2px 14px rgba(0, 0, 0, 0.301);
     align-items: flex-start;
     position: relative;
+    padding-left: 0;
 }
-
+.card-light--shadows{
+    box-shadow: 0 0 14px rgba(0, 0, 0, .300);
+}
+.card-dark--shadows{
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.200);
+}
 .task--done {
     border-left: 10px solid #0f0;
 }
@@ -116,7 +121,12 @@
 }
 
 .card:hover {
-    box-shadow: -1px 2px 14px rgba(0, 0, 0, 0.401);
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.401);
+    cursor: default;
+}
+
+.card-dark--shadows:hover{
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.300);
     cursor: default;
 }
 
@@ -229,11 +239,20 @@
     background-color: #00f;
 }
 
+@media(max-width: 900px) {
+    .btn--addTask,
+    .card,
+    .form {
+        padding: 10px;
+        width: 60vw;
+    }
+}
+
 @media(max-width: 500px) {
     .btn--addTask,
     .card,
     .form {
         padding: 10px;
-        width: 80vw;
+        width: 90vw;
     }
 }
