@@ -16,16 +16,19 @@ export default function AddTaskForm() {
     const [task, setTask] = useState({ id: todoId, title: "", description: "", status: "toDo" } as TodoTypes)
 
     function handleChangeTitle(e: string) {
-        const firstLetter = e.charAt(0).toUpperCase();
-        const restOfString = e.slice(1);
-        const capitalized = firstLetter + restOfString;
-        setTask({ ...task, title: capitalized })
+        const text = capitalize(e.replace(/^\s+/g, ""))
+        setTask({ ...task, title: text })
     }
     function handleChangeDescription(e: string) {
-        const firstLetter = e.charAt(0).toUpperCase();
-        const restOfString = e.slice(1);
+        const text = capitalize(e.replace(/^\s+/g, ""))
+        setTask({ ...task, description: text})
+    }
+
+    function capitalize(text:string):string {
+        const firstLetter = text.charAt(0).toUpperCase();
+        const restOfString = text.slice(1);
         const capitalized = firstLetter + restOfString;
-        setTask({ ...task, description: capitalized })
+        return capitalized;
     }
 
     function handleCreateTask(e: any): void {
@@ -35,6 +38,7 @@ export default function AddTaskForm() {
         } else if (app.tasks.some(filteredTask => task.title == filteredTask.title)) {
             dispatch(setMsg("The titles are equals!"))
         } else {
+            setTask({ ...task, title:task.title.trim(), description: task.description.trim(),})
             dispatch(createTask(task))
             dispatch(hideForm())
             dispatch(setMsg("Task created!"))
@@ -45,11 +49,11 @@ export default function AddTaskForm() {
         <form className="form">
             <div className="form-title-container">
                 <label htmlFor="title">Title</label>
-                <input type="text" id="title" autoCapitalize="on" value={task.title} onChange={e => handleChangeTitle(e.target.value)} className={`form-input ${app.theme == "light" ? "form-input--light" : "form-input--dark"}`} />
+                <input type="text" id="title" autoComplete="none" value={task.title} onChange={e => handleChangeTitle(e.target.value)} className={`form-input ${app.theme == "light" ? "form-input--light" : "form-input--dark"}`} />
             </div>
             <div className="form-desc-container">
                 <label htmlFor="desc">Description</label>
-                <input type="text" autoCapitalize="on" id="desc" value={task.description} onChange={e => handleChangeDescription(e.target.value)} className={`form-input ${app.theme == "light" ? "form-input--light" : "form-input--dark"}`} />
+                <input type="text" autoComplete="none" id="desc" value={task.description} onChange={e => handleChangeDescription(e.target.value)} className={`form-input ${app.theme == "light" ? "form-input--light" : "form-input--dark"}`} />
             </div>
             <button type="button" className={`btn btn--form ${app.theme == "light" ? "btn--light" : "btn--dark"}`} onClick={handleCreateTask}>Create Task</button>
         </form>
