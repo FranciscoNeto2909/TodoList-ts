@@ -20,6 +20,7 @@ const AppSlice = createSlice({
     initialState: {
         formVisibility: false,
         msgVisibility: false,
+        hasTaskDone:false,
         theme: "light",
         msg: "",
         tasks: [] as Task[]
@@ -30,6 +31,12 @@ const AppSlice = createSlice({
         },
         hideForm: (state) => {
             return { ...state, formVisibility: false }
+        },
+        showConfetti: (state) => {
+            return { ...state, hasTaskDone: true }
+        },
+        hideConfetti: (state) => {
+            return { ...state, hasTaskDone: false }
         },
         hideMsg: (state) => {
             return { ...state, msgVisibility: false }
@@ -83,5 +90,5 @@ const AppSlice = createSlice({
     },
 })
 
-export const { showForm, hideForm, hideMsg, setMsg, clearMsg, setTheme, getTask, createTask, deleteTask, changeTaskStatus } = AppSlice.actions
+export const { showForm, hideForm, showConfetti,  hideConfetti, hideMsg, setMsg, clearMsg, setTheme, getTask, createTask, deleteTask, changeTaskStatus } = AppSlice.actions
 export default AppSlice.reducer

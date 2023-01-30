@@ -10,6 +10,7 @@ export interface IApp {
     App: {
         formVisibility: boolean,
         msgVisibility:boolean,
+        hasTaskDone:boolean,
         msg:string;
         theme:string,
         tasks: Array<TaskTypes>

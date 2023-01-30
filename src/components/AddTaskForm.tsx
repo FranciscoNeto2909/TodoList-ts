@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createTask, hideForm, setMsg } from "../assets/AppSlice"
 import { IApp } from "./TodoList"
+import taskCreated from "../sounds/taskCreated.mp3"
+
 type TodoTypes = {
     id: number,
     title: string,
@@ -42,6 +44,8 @@ export default function AddTaskForm() {
             dispatch(createTask(task))
             dispatch(hideForm())
             dispatch(setMsg("Task created!"))
+            const taskCreatedAudio = new Audio(taskCreated)
+            taskCreatedAudio.play()
         }
     }
 

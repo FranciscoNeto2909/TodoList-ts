@@ -1,7 +1,11 @@
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineRetweet } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { changeTaskStatus, deleteTask, setMsg } from "../assets/AppSlice";
+import { changeTaskStatus, deleteTask, setMsg, showConfetti } from "../assets/AppSlice";
 import { IApp } from "./TodoList";
+import taskDone from "../sounds/taskDone.mp3"
+import taskDeleted from "../sounds/taskDeleted.mp3"
+import taskRedone from "../sounds/taskRedone.mp3"
+
 
 export type TaskTypes = {
     id: string,
@@ -15,6 +19,7 @@ interface CardTypes {
 }
 
 export default function Card(data: CardTypes) {
+    const taskDoneAudio = new Audio(taskDone)
     const dispatch = useDispatch()
     const app = useSelector<IApp, IApp["App"]>(data => data.App)
 
@@ -27,10 +32,14 @@ export default function Card(data: CardTypes) {
         if (data.task.status == "toDo" && !app.msgVisibility) {
             dispatch(changeTaskStatus(task))
             dispatch(setMsg("Task finished!"))
+            dispatch(showConfetti())
+            taskDoneAudio.play()
         }
     }
 
     function handleRedoTask() {
+        const taskRedoneAudio = new Audio(taskRedone)
+        taskRedoneAudio.play()
         task.status = "toDo"
         if (data.task.status == "done" && !app.msgVisibility) {
             dispatch(changeTaskStatus(task))
@@ -39,12 +48,19 @@ export default function Card(data: CardTypes) {
     }
 
     function handleDeleteTask() {
-        dispatch(deleteTask(data.task.id))
-        dispatch(setMsg("Task deleted!"))
+        const taskDeletedAudio = new Audio(taskDeleted)
+        if (data.task.status == "toDo") {
+            taskDeletedAudio.play()
+            dispatch(deleteTask(data.task.id))
+            dispatch(setMsg("Task not concluded!"))
+        } else if (data.task.status == "done") {
+            taskDoneAudio.play()
+            dispatch(deleteTask(data.task.id))
+            dispatch(setMsg("Task concluded with success!"))
+        }
     }
-
     return (
-        <div className={`card ${app.theme == "light" ? "card-light--shadows" : "card-dark--shadows"} ${data.task.status == "done" ? "task--done":""} ${data.task.status == "done" && app.theme == "dark" ? "task-dark--done":""}`} id={data.task.id}>
+        <div className={`card ${app.theme == "light" ? "card-light--shadows" : "card-dark--shadows"} ${data.task.status == "done" ? "task--done" : ""} ${data.task.status == "done" && app.theme == "dark" ? "task-dark--done" : ""}`} id={data.task.id}>
             <h4 className="card-title">{data.task.title}</h4>
             <p className="card-description">{data.task.description}</p>
             <div className="card-buttons">
