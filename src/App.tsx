@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearMsg, hideMsg, setTheme } from "./assets/AppSlice";
+import { clearMsg, getTask, hideMsg, setTheme } from "./assets/AppSlice";
 import { Message } from "./components/Message";
 import TodoList, { IApp } from "./components/TodoList";
 import CheckButton from "./components/CheckButton"
@@ -32,12 +32,12 @@ export default function App() {
     const theme = localStorage.getItem("theme")
     if (theme != null) {
       dispatch(setTheme(theme))
-    } 
+    }
     if (theme == "dark") {
       setIsChecked(true)
     }
+    dispatch(getTask())
   }, [])
-
   return (
     <div className={app.theme == "light" ? "App" : "App bg--dark"}>
       <CheckButton value={app.theme} onClick={handleToggleTheme} isChecked={isChecked} />
